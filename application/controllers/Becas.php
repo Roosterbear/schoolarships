@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/*
+ *
+ * @author: Luis Fernando Perea Gallosso
+ *
+ */
 class Becas extends CI_Controller {
 
 	public $becas_util;

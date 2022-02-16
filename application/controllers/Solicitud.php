@@ -1,7 +1,11 @@
 <?php
 session_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/*
+ *
+ * @author: Luis Fernando Perea Gallosso
+ *
+ */
 class Solicitud extends CI_Controller {
 
 	public $becas_util;

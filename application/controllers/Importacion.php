@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/*
+ *
+ * @author: Luis Fernando Perea Gallosso
+ *
+ */
 class Importacion extends CI_Controller
 {
 	

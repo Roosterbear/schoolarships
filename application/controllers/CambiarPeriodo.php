@@ -1,7 +1,10 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/*
+ *
+ * @author: Luis Fernando Perea Gallosso
+ *
+ */
 class CambiarPeriodo extends CI_Controller
 {
 

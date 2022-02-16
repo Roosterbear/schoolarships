@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/*
+ *
+ * @author: Luis Fernando Perea Gallosso
+ *
+ */
 require_once __DIR__ . "/../libraries/db/db.php";
 require_once __DIR__."/../libraries/PHPExcel.php";
 

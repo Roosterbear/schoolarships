@@ -1,6 +1,11 @@
 <?php
 session_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
+/*
+ *
+ * @author: Luis Fernando Perea Gallosso
+ *
+ */
 /* ------------------------------------------------------------ */
 /* --- ESTE CONTROLADOR ES PARA HACER PRUEBAS DESDE EL MENU --- */
 /* --  CON ESTO SE EVITA TENER QUE ENTRAR A SITO #NO BORRAR# -- */
