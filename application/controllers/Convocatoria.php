@@ -31,7 +31,7 @@ class Convocatoria extends CI_Controller {
 	
 	
 	// ----------------------------
-	// Crear una convocatoria nueva
+	// Creates new Convocatoria
 	// ----------------------------	
 	
 	public function insertConvocatoria(){
@@ -75,7 +75,7 @@ class Convocatoria extends CI_Controller {
 	
 	
 	// ------------------------------------------------
-	// Mensaje de respuesta de creacion de convocatoria
+	// Answer Message of Creacion de Convocatoria
 	// ------------------------------------------------	
 	
 	public function done($maleta){
@@ -98,7 +98,7 @@ class Convocatoria extends CI_Controller {
 	
 	
 	// -----------------------------
-	// Modificacion de convocatorias
+	// Convocatorias modification
 	// -----------------------------
 	
 	public function setDataToUpdate(){
@@ -121,9 +121,9 @@ class Convocatoria extends CI_Controller {
 	}	
 	
 	
-	// -----------------------------
-	// Eliminacion de convocatorias
-	// -----------------------------
+	// -------------------------
+	// Convocatorias deleting
+	// -------------------------
 	
 	public function setDataToDelete(){
 		if ($_REQUEST){
@@ -138,7 +138,7 @@ class Convocatoria extends CI_Controller {
 	
 	
 	// ---------------------------------------------
-	// Obtener datos de UNA convocatoria seleccionada
+	// Get data from a Single Selected Convocatoria 
 	// ---------------------------------------------
 	
 	public function setDataToDisplay(){
@@ -154,7 +154,7 @@ class Convocatoria extends CI_Controller {
 	
 	
 	// ---------------------------------------------
-	// Funcion llamada desde SOLICITUD de Becas
+	// Function called from SOLICITUD de Becas
 	// ---------------------------------------------
 	public function getConvocatorias(){
 		if($_REQUEST){			
@@ -227,7 +227,7 @@ class Convocatoria extends CI_Controller {
 		echo $this->becas_util->convocatorias->mostrarHistorial($matricula);
 	}
 	
-	// Se utiliza en SOLICITUD DE BECAS para mostrar becas ya asignadas
+	// Used on SOLICITUD DE BECAS to show yet assigned becas
 	public function listarAsignadas(){
 		if($_REQUEST){
 			$matricula = $_REQUEST['matricula'];

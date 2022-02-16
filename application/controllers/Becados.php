@@ -26,14 +26,13 @@ class Becados extends CI_Controller{
 		$this->load->view('header');
 		$data['usuario'] = $this->_user;	
 		
-		// Periodo Actual en Texto
+		// Text Current Period
 		$data['periodo_actual'] = @$this->becas_util->utilerias->getPeriodoActual();
 		
-		// ID del periodo actual
+		// Current period ID
 		$data['id_periodo_actual'] = @$this->becas_util->utilerias->getIdPeriodoActual();		
 		
-		// FILTROS
-		
+		// Filters		
 		$data['carreras'] = @$this->becas_util->alumnos->getCarreras();
 		$data['tipos_beca'] = @$this->becas_util->alumnos->getTiposBecaFull();
 		

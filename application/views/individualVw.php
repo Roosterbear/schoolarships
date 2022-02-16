@@ -14,35 +14,31 @@
 
 		<form id="carga_individual_de_becas" name="carga_individual_de_becas" method="post" action="#" role="form">
 
-
-
-
-		
-			<!-- ************************************ -->  
-			<!-- ********* ELEGIR PERIODO *********** -->  
-			<!-- ************************************ -->  
+			<!-- ************************************ -->
+			<!-- ********* ELEGIR PERIODO *********** -->
+			<!-- ************************************ -->
 			<br />
 			<div class="row">
 				<div class="col-lg-12">
-					<div id="data_periodos_alta">	
+					<div id="data_periodos_alta">
 						<h2><label for="elegir_periodo">Periodo:</label></h2>
 						<select id="elegir_periodo" class="form-control input-sm" name="elegir_periodo">
 							<option value="0">Selecciona Periodo a aplicar</option>
-							<?php 							
-								for($i=$cuantos_periodos_hay;$i>=1;$i--){							
-									echo "<option value=\"{$i}\">{$todos_los_periodos[$i]}</option>";								
+							<?php
+								for($i=$cuantos_periodos_hay;$i>=1;$i--){
+									echo "<option value=\"{$i}\">{$todos_los_periodos[$i]}</option>";
 								}
 
 							?>
 						</select>
 					</div>
 				</div>
-			</div>	
+			</div>
 
 
-			<!-- ************************************ -->  
-			<!-- ************ MATRICULA ************* -->  
-			<!-- ************************************ -->  
+			<!-- ************************************ -->
+			<!-- ************ MATRICULA ************* -->
+			<!-- ************************************ -->
 
 			<h2>
 				<div class="input-group">
@@ -52,17 +48,17 @@
 			</h2>
 
 
-			<!-- ************************************ -->  
-			<!-- ********* TIPOS DE BECAS *********** -->  
-			<!-- ************************************ -->  
+			<!-- ************************************ -->
+			<!-- ********* TIPOS DE BECAS *********** -->
+			<!-- ************************************ -->
 			<br />
 			<div class="row">
 				<div class="col-lg-12">
-					<div id="data_becas">	
+					<div id="data_becas">
 						<h2><label for="elegir_tipo_beca">Tipo de Beca:</label></h2>
 						<select id="elegir_tipo_beca" class="form-control input-sm" name="elegir_tipo_beca">
 							<option value="0">Selecciona la Beca a aplicar</option>
-							<?php 
+							<?php
 								foreach ($tipos_beca as $tb){
 									echo "<option value=\"{$tb['id']}\">{$tb['descripcion']}</option>";
 								}
@@ -73,7 +69,7 @@
 				</div>
 			</div>
 		</form>
-	</div><!-- seleccion -->  
+	</div><!-- seleccion -->
 
 	<br />
 	<h1>
@@ -82,16 +78,16 @@
 
 	<br />
 	<span class="input-group-btn">
-		<!-- BOTON PARA VERIFICAR (Que el alumno exista y no tenga BECA) -->  
+		<!-- BOTON PARA VERIFICAR (Que el alumno exista y no tenga BECA) -->
 		<a href="#" class="btn btn-success btn-md" id="btn_asignar_alumno" name="btn_asignar_alumno" disabled="disabled">Proceder <i class="fa fa-check-circle" aria-hidden="true"></i></a>
 	</span>
 
 
-	<!-- BOTON PARA RESETEAR (Recarga la pagina) -->  
+	<!-- BOTON PARA RESETEAR (Recarga la pagina) -->
 	<a href="#" class="btn btn-danger btn-md" id="btn_resetear_individual" name="btn_resetear_individual">Regresar <i class="fa fa-rotate-left" aria-hidden="true"></i></a>
 </div>
 
-<?php 
+<?php
 //print_r($carreras);
 //print_r($tipos_beca);
  ?>
@@ -108,19 +104,17 @@ var beca = '';
 
 $(document).ready(function(){
 
-	/* ------ CAMBIAR PERIODO ------- */	
+	/* ------ Tricks to change period view ------- */
 	$('#select_periodos').click(function(){
 	    $('#data_periodos_alta').slideToggle( 'fast' );
 	    $('#select_periodos').find('i').toggleClass('fa-caret-down fa-rotate-left');
 		$('#select_periodos').find('z').toggleClass('ocultar_periodos mostrar_periodos');
 		$('#select_periodos').find('periodo').toggleClass('sin_tachar tachar');
-		$('#select_periodos').find('periodo').toggleClass('azul gris');		
+		$('#select_periodos').find('periodo').toggleClass('azul gris');
   		return true;
 	});
 
-	/* ------ VERIFICACION DE INFORMACION ------- */	
-
-
+	/* ------ Data verification ------- */
 	$('#data_matricula').focusout(function(){
 		matricula = parseInt($('#data_matricula').val());
 		if (matricula > 100000){
@@ -133,14 +127,18 @@ $(document).ready(function(){
 
 
 	$('#btn_asignar_alumno').on('click',function(){
-		
-		// Ocultar para que no modifiquen
+
+		// Hide what it doesn't changed
 		$('#seleccion').hide();
 
 		beca = $('#elegir_tipo_beca').val();
 
-		// VALIDAR PERIODO (Si es el activo o elije uno)
-		if ($('periodo').hasClass('tachar')){
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// CHANGING THE VALUE OF A PERIOD
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+		// Check period (If actived or selected)
+		if ($('periodo').hasClass('tachar')){ // Tachar give us the tip
 			periodo = $('#elegir_periodo').val();
 		}else{
 			periodo = $('idPeriodo').html();
@@ -149,7 +147,7 @@ $(document).ready(function(){
 		// VALIDAR MATRICULA (Que no esté vacía)
 		// Es una doble validacion que vale la pena para que no truene
 		if ($('#data_matricula').val() == ''){
-			matricula = 0;			
+			matricula = 0;
 		}else{
 			matricula = $('#data_matricula').val();
 		}
@@ -159,13 +157,13 @@ $(document).ready(function(){
 
 		$.post(asignacion_beca_individual,{periodo:periodo,matricula:matricula,beca:beca},function(resp){
 			$('#respuesta_asignacion_beca').html(resp);
-		}); 
+		});
 
 
-	});	
+	});
 
 	// RESETEAR DATOS
-	$('#btn_resetear_individual').on('click',function(){		
+	$('#btn_resetear_individual').on('click',function(){
 		location.reload(true);
 	});
 

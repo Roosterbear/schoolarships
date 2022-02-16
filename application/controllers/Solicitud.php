@@ -26,24 +26,24 @@ class Solicitud extends CI_Controller {
 			$this->_sid = $_GET ['sid'];
 			$_SESSION['uid'] = $_GET ['uid'];
 			$_SESSION['sid'] = $_GET ['sid'];
-			// Checa si es alumno (el parametro es una matrícula)
+			// Checks if it is a student (the parameter is matrícula)
 			$this->_es_alumno = $this->becas_util->alumnos->esAlumno($this->_user)==''?false:true;
 			$this->_hacker = $this->becas_util->utilerias->checarSesion($this->_user, $this->_sid);
 			
-			/* TERMINAR TODO SI NO ES LA SESION ACTIVA */
+			/* FINISH IF IS NOT AN ACTIVE SESSION */
 			if ($this->_hacker){
 				echo '<h1>Sesion terminada</h1>';
 				exit('Ingresar con matricula y actualizar sesion');
 			}
 			
-			// Deshabilitando la restricción de inscrito 
+			// Disable Inscrito restriction 
 			//$this->_inscrito = $this->becas_util->alumnos->estaInscrito($this->_user)?true:false;
 			$this->_inscrito = true;
 			$this->_becado_externo = $this->becas_util->alumnos->tieneBecaExterna($this->_user);
 			$this->becas_util->alumnos->setMatriculaAlumno($_GET ['uid']);
 			$this->_baja = $this->becas_util->alumnos->tieneBaja($_GET ['uid']);
 		}else{
-			// Si no recibe parámetro
+			// In case we don't get a parameter
 			$this->becas_util->alumnos->setMatriculaAlumno('00');
 		}			
 	}
@@ -60,9 +60,9 @@ class Solicitud extends CI_Controller {
 		$nombre = $this->becas_util->alumnos->esAlumno($matricula);
 		
 		
-		// CHECAR SI HIZO LA ENCUESTA !!!
+		// Check the poll
 		
-		// Se va a deshabilitar de manera temporal
+		// Temporaly disabled
 		$this->_hizo_encuesta = true;
 		//$this->_hizo_encuesta = $this->becas_util->alumnos->hizoEncuesta($matricula);
 		
@@ -77,7 +77,6 @@ class Solicitud extends CI_Controller {
 		
 		$data['nombre'] = $this->becas_util->alumnos->getNombreAlumnoByMatricula($matricula);			
 		
-		// SI HIZO LA ENCUESTA MANDARLO A BECAS, SINO, AL MENSAJE
 		if ($this->_hizo_encuesta){
 			$this->load->view('solicitudesVw',$data);
 		}else{

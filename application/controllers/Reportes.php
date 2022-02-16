@@ -71,7 +71,7 @@ class Reportes extends CI_Controller {
 				{$carrera_sql}
 				{$tipo_sql}
 				";
-		// Linea 200	
+		// Line 200	
 		//echo $sql;
 		echo $this->becas_util->utilerias->getSolicitantes($sql);		
 	}

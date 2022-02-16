@@ -25,7 +25,7 @@ class Individual extends CI_Controller
 			if (true){
 				$_SESSION['usuario'] = 'EXTERNO';
 					
-				// Dejar en 0 para bloquear acceso externo
+				// Let in 0 to block external access
 				//$_SESSION['usuario'] = 0;
 			}
 		}
@@ -33,8 +33,13 @@ class Individual extends CI_Controller
 		$data['usuario'] = $_SESSION['usuario'];
 		$this->load->view('header');		
 
-		$data['periodo_actual'] = @$this->becas_util->utilerias->getPeriodoActual();		
+		// Current period in text
+		$data['periodo_actual'] = @$this->becas_util->utilerias->getPeriodoActual();
+
+		// Current period ID
 		$data['id_periodo_actual'] = @$this->becas_util->utilerias->getIdPeriodoActual();
+		
+		// Data to let choose a period
 		$data['todos_los_periodos'] = @$this->becas_util->utilerias->todosLosPeriodos();
 		$data['cuantos_periodos_hay'] = @$this->becas_util->utilerias->cuantosPeriodosHay();
 		
@@ -42,7 +47,7 @@ class Individual extends CI_Controller
 		$data['tipos_beca'] = @$this->becas_util->alumnos->getCategoriaBecaFull();
 
 		
-		// Esta linea es para bloquear acceso externo a SITO
+		// This line is to block external access to SITO
 		//if($_SESSION['usuario'] != 'EXTERNO'){
 		if($_SESSION['usuario']){
 			$this->load->view('individualVw',$data);

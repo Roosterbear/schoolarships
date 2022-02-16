@@ -139,7 +139,7 @@ class Asignacion extends CI_Controller
 		";
 		
 		//print_r($sql);
-		//echo $sql; //<-CHECAR QUERY
+		//echo $sql; //<- To check Query
 		$this->becas_util->utilerias->setPeriodo($periodo);
 		
 		if ($excel){

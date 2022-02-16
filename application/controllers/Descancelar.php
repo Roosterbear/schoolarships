@@ -15,7 +15,7 @@ class Descancelar extends CI_Controller
 	
 		$this->load->library('BecasUtil');
 		$this->becas_util = new BecasUtil();	
-		$this->ip = getenv("REMOTE_ADDR"); //Sacar IP Local				
+		$this->ip = getenv("REMOTE_ADDR"); //Get Local IP		
 		
 		$this->periodo_actual = $this->becas_util->utilerias->getIdPeriodoActual();		
 	}
@@ -28,7 +28,7 @@ class Descancelar extends CI_Controller
 			if (true){				
 				$_SESSION['usuario'] = 'EXTERNO';
 					
-				// Dejar en 0 para bloquear acceso externo
+				// Let 0 to block external access
 				//$_SESSION['usuario'] = 0;
 			}
 		}
@@ -36,7 +36,7 @@ class Descancelar extends CI_Controller
 		$this->load->view('header');	
 		$data['usuario'] = $_SESSION['usuario'];				
 		
-		// Esta linea es para bloquear acceso externo a SITO
+		// This line is to block external access to SITO
 		//if($_SESSION['usuario'] != 'EXTERNO'){
 		if($_SESSION['usuario']){
 			$this->load->view('descancelacionVw',$data);
@@ -48,7 +48,7 @@ class Descancelar extends CI_Controller
 	}
 	
 	
-	// Saca el periodo actual en texto basado en las funciones de Utilerias
+	// Get current period in text based on Utilerias functions
 	public function datosPeriodo(){
 		
 		$id = $this->periodo_actual;	
@@ -79,14 +79,16 @@ class Descancelar extends CI_Controller
 		$matricula = $_REQUEST['matricula'];
 		$periodo = $this->periodo_actual;	
 				
-		// Guardamos el log del evento
+		// Saves Event Log
 		$this->log($matricula);
 		
-		// Pone el estatus en 1 de nuevo
-		echo $this->becas_util->utilerias->descancelarBeca($matricula, $periodo);
+		// We've been checked yet if it has been cancelled
+		// This functions doesn't change Beca type (must be 0)
+		echo $this->becas_util->utilerias->descancelarBeca($matricula, $periodo); // Sets status to 1 again
 		
 	}	
 	
+	// Looking for a guilty
 	public function log($matricula){
 		$texto = "DES-CANCELACION de beca para el alumno con matricula $matricula ";
 		$texto .= " por usuario: ".$_SESSION['usuario'];

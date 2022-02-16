@@ -26,13 +26,17 @@ class NoBecados extends CI_Controller{
 		$this->load->view('header');
 		$data['usuario'] = $this->_user;	
 		
-		// Periodo Actual en Texto
+		// Current period in text
 		$data['periodo_actual'] = @$this->becas_util->utilerias->getPeriodoActual();
 		
-		// ID del periodo actual
-		$data['id_periodo_actual'] = @$this->becas_util->utilerias->getIdPeriodoActual();		
+		// Current period ID
+		$data['id_periodo_actual'] = @$this->becas_util->utilerias->getIdPeriodoActual();	
 		
-		// FILTROS
+		// Data to let choose a period
+		$data['todos_los_periodos'] = @$this->becas_util->utilerias->todosLosPeriodos();		
+		$data['cuantos_periodos_hay'] = @$this->becas_util->utilerias->cuantosPeriodosHay();
+		
+		// FILTERS
 		
 		$data['carreras'] = @$this->becas_util->alumnos->getCarreras();		
 		
@@ -79,7 +83,7 @@ class NoBecados extends CI_Controller{
 				,bc.descripcion as convocatoria
 				from beca_asignada ba
 				inner join beca_solicitud bs on ba.matricula = bs.matricula
-				inner join beca_causa_rechazo bcr on bcr.id = bs.id_causa_rechazo
+				left outer join beca_causa_rechazo bcr on bcr.id = bs.id_causa_rechazo
 				inner join beca_convocatoria bc on bc.id = bs.id_convocatoria_beca
 				inner join alumno a on ba.matricula = a.matricula
 				inner join persona p on p.cve_persona = a.cve_alumno
@@ -89,7 +93,9 @@ class NoBecados extends CI_Controller{
 					inner join (select matricula,max(cve_grupo) as cve_grupo from alumno_grupo  group by matricula ) ag on ag.cve_grupo=g.cve_grupo
 					inner join  carrera as c on c.cve_carrera=g.cve_carrera
 					)gpo on gpo.matricula=ba.matricula	
-				where ba.cve_periodo = {$periodo} and cve_beca_cat = 0
+				where ba.cve_periodo = {$periodo}
+				and bs.id_periodo_aplicacion = {$periodo}
+				and cve_beca_cat = 0
 				{$carrera_sql}
 				{$orden_sql}
 				";

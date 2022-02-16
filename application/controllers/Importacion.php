@@ -16,13 +16,13 @@ class Importacion extends CI_Controller
 		$this->becas_util = new BecasUtil();			
 		
 		/*
-		 * --------- DESARROLLO [SOLO PRUEBAS]
+		 * --------- DEVELOPMENT [TESTING]
 		 */
 		$this->_usuarioSITO = isset($_REQUEST ['uid'])?$_REQUEST ['uid']:'externo';
 		
 		
 		/*
-		 * --------- PRODUCCION
+		 * --------- PRODUCTION
 		 */
 		//$this->_usuarioSITO = $_REQUEST?$_REQUEST['uid']:0;
 		

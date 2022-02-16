@@ -28,7 +28,7 @@ class Cancelacion extends CI_Controller
 			if (true){				
 				$_SESSION['usuario'] = 'EXTERNO';
 					
-				// Dejar en 0 para bloquear acceso externo
+				// Let 0 to block external access
 				//$_SESSION['usuario'] = 0;
 			}
 		}
@@ -36,7 +36,7 @@ class Cancelacion extends CI_Controller
 		$this->load->view('header');	
 		$data['usuario'] = $_SESSION['usuario'];				
 		
-		// Esta linea es para bloquear acceso externo a SITO
+		// This line is to block external access to SITO
 		//if($_SESSION['usuario'] != 'EXTERNO'){
 		if($_SESSION['usuario']){
 			$this->load->view('cancelacionVw',$data);
@@ -48,7 +48,7 @@ class Cancelacion extends CI_Controller
 	}
 	
 	
-	// Saca el periodo actual en texto basado en las funciones de Utilerias
+	// Gets current period in text based on Utilerias functions
 	public function datosPeriodo(){
 		
 		$id = $this->periodo_actual;	
@@ -79,10 +79,10 @@ class Cancelacion extends CI_Controller
 		$matricula = $_REQUEST['matricula'];
 		$periodo = $this->periodo_actual;	
 				
-		// Guardamos el log del evento
+		// Saves event log
 		$this->log($matricula);
 		
-		// Pone el estatus en 5 y cambia la clave de beca a 0
+		// Sets status in 5 and changes Clave Beca to 0
 		echo $this->becas_util->utilerias->cancelarBeca($matricula, $periodo);
 		
 	}	
