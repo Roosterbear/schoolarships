@@ -8,7 +8,7 @@
 					<p><h1 class="titular text-center">&#1052;&#1069;&#1053;&#1059; &#1041;&#1069;&#1050;&#1040;&#1067;  </h1></p>
 					<br />
 					<table class="table table-bordered table-condensed">
-						<tr><td>					
+						<tr><td>
 						<h3 id="abc_convocatorias">&#1040;&#1041;&#1050; &#1050;&#1086;&#1085;&#1074;&#1086;&#1082;&#1072;&#1090;&#1098;&#1086;&#1088;&#1080;&#1072;&#1099;</h3>
 						</td></tr>
 						<tr><td>
@@ -36,12 +36,12 @@
 						<tr><td class="text-center	"><h3>
 						<input type="text" id="matricula">
 						</h3>
-						</td></tr>
+						</td></tr>						
 					</table>
 				</div>
 				<div class="col-lg-4"></div>
 			</div>
-		</div>	
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -58,13 +58,13 @@ let matricula = 0;
 $('#abc_convocatorias').click(function(){
 	$.post(dire_abc_convocatorias,function(resp){
 		$('#abc').html(resp);
-	});	
+	});
 });
 
 $('#abc_validadores').click(function(){
 	$.post(dire_abc_validadores,function(resp){
 		$('#abc').html(resp);
-	});	
+	});
 });
 
 $('#solicitudes').click(function(){
@@ -73,36 +73,36 @@ $('#solicitudes').click(function(){
 	dire_solicitudes = dire_solicitudes + matricula;
 	$.post(dire_solicitudes,function(resp){
 		$('#abc').html(resp);
-	});	
+	});
 });
 
 $('#restricciones').click(function(){
 	$.post(dire_restricciones,function(resp){
 		$('#abc').html(resp);
-	});	
+	});
 });
 
 $('#reportes').click(function(){
 	$.post(dire_reportes,function(resp){
 		$('#abc').html(resp);
-	});	
+	});
 });
 
 $('#asignacion').click(function(){
 	$.post(dire_asignacion,function(resp){
 		$('#abc').html(resp);
-	});	
+	});
 });
 
 $('#creacion').click(function(){
 	$.post(dire_creacion,function(resp){
 		$('#abc').html(resp);
-	});	
+	});
 });
 
 $('#cancelacion').click(function(){
 	$.post(dire_cancelacion,function(resp){
 		$('#abc').html(resp);
-	});	
+	});
 });
 </script>

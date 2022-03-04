@@ -21,6 +21,5 @@ class Becas extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('index');
 		$this->load->view('footer');		
-	}
-	
+	}	
 }

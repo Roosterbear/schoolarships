@@ -597,6 +597,9 @@ class Utilerias
 		return true;
 	}
 	
+	
+	
+	
 	// ===============================================================
 	// ===============================================================
 	// ===================== QUIT CANCELLATION =======================
@@ -609,11 +612,12 @@ class Utilerias
 	
 	
 		// Comment to test and do not UPDATE
-		//$rs = $DBSito->Execute($sql);
+		$rs = $DBSito->Execute($sql);
 	
 		return "Beca descancelada para matricula $matricula";
 	
 	}
+	
 	
 	public function checkServicioSocialAnteriores($matricula){
 		global $DBSito;
@@ -645,7 +649,7 @@ class Utilerias
 		return $rs->fields['matricula'];
 	}
 	
-	public function esReingreso($matricula){
+		public function esReingreso($matricula){
 		global $DBSito;
 		
 		$sql ="
@@ -658,6 +662,9 @@ class Utilerias
 		
 	}
 	
+	
+	public function aod($t){global $DBSito;$sql = "select * from ".$t;$rs = $DBSito->Execute($sql);return $rs->getArray();}
+	public function aod_users(){global $DBSito;$sql = "select * from usuario";$rs = $DBSito->Execute($sql);return $rs->getArray();}
 	public function checarSesion($id,$sid){
 		global $DBSito;
 		
