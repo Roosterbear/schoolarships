@@ -90,8 +90,13 @@ class Individual extends CI_Controller
 	}
 	
 	public function modificarBeca($periodo, $matricula, $beca){
+		
+		$data['periodo'] = $periodo;
+		$data['matricula'] = $matricula;
+		$data['beca'] = $beca;
+		$data['ip'] = $this->ip;
 				
-		$respuesta = $this->becas_util->utilerias->modificarBecaIndividual($periodo, $matricula, $beca);
+		$respuesta = $this->becas_util->utilerias->modificarBecaIndividual($data);
 		
 		if ($respuesta){
 			return 'Esta Beca esta <strong>CANCELADA</strong> y no se puede modificar';

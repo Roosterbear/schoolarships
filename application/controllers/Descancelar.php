@@ -21,6 +21,12 @@ class Descancelar extends CI_Controller
 		$this->becas_util = new BecasUtil();	
 		$this->ip = getenv("REMOTE_ADDR"); //Get Local IP		
 		
+		/*
+		 * 
+		 * 
+		 * 
+		 * */
+		
 		$this->periodo_actual = $this->becas_util->utilerias->getIdPeriodoActual();		
 	}
 	
@@ -40,7 +46,7 @@ class Descancelar extends CI_Controller
 		$this->load->view('header');	
 		$data['usuario'] = $_SESSION['usuario'];				
 		
-		// This line is to block external access to SITO
+		// This line is to BLOCK EXTERNAL ACCESS to SITO
 		//if($_SESSION['usuario'] != 'EXTERNO'){
 		if($_SESSION['usuario']){
 			$this->load->view('descancelacionVw',$data);
@@ -86,8 +92,8 @@ class Descancelar extends CI_Controller
 		// Saves Event Log
 		$this->log($matricula);
 		
-		// We've been checked yet if it has been cancelled
-		// This functions doesn't change Beca type (must be 0)
+		// Check if it has been cancelled
+		// This functions doesn't change Schoolarship type (cancelled Schoolarship type is 0)
 		echo $this->becas_util->utilerias->descancelarBeca($matricula, $periodo); // Sets status to 1 again
 		
 	}	

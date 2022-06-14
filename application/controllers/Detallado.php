@@ -35,10 +35,13 @@ class Detallado extends CI_Controller
 		$data['id_periodo_actual'] = @$this->becas_util->utilerias->getIdPeriodoActual();
 		$data['id_periodo_siguiente'] = @$this->becas_util->utilerias->getIdPeriodoSiguiente();
 		
+		$data['todos_los_periodos'] = @$this->becas_util->utilerias->todosLosPeriodos();
+		$data['cuantos_periodos_hay'] = @$this->becas_util->utilerias->cuantosPeriodosHay();
+		
 		$data['carreras'] = @$this->becas_util->alumnos->getCarreras();
 		$data['tipos_beca'] = @$this->becas_util->alumnos->getTiposBeca();
 		
-		$this->load->view('asignacionVw',$data);
+		$this->load->view('detalladoVw',$data);
 		$this->load->view('footer');
 	
 	}

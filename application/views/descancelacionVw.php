@@ -77,6 +77,7 @@ $(document).ready(function(){
 	function quitCancel(matricula){
 		$.post("<?=base_url()?>"+"index.php/Descancelar/descancelarBeca/",{matricula:matricula},function(resp){
 			mensajeLobibox('success',resp);
+			//console.log(resp);
 		});
 
 		// Clear input

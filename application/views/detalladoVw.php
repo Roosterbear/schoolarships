@@ -6,7 +6,7 @@
 			<span class="details_text"><z class="ocultar_filtrado"></z>FILTRADO <i class="fa fa-caret-up" aria-hidden="true"></i></span>
 		</span>
 	</div>
-
+	
 	<div class="row">
 		<div class="col-lg-12">
 
@@ -23,10 +23,10 @@
 					<div class="col-lg-12">
 						<div id="data_periodos">
 							<h4>Periodo:</h4>
-							<select id="elegir_periodo" class="form-control input-sm" name="elegir_periodo">	                            
-	                            <option value="<?=$id_periodo_actual?>"><?=$periodo_actual?></option>
-	                            <option value="<?=$id_periodo_anterior?>"><?=$periodo_anterior?></option>
-								<option value="<?=$id_periodo_siguiente?>"><?=$periodo_siguiente?></option><!-- AQUI MODIFIQUE JGUERRERO 08-01-2020 -->
+							<select id="elegir_periodo" class="form-control input-sm" name="elegir_periodo">
+							<?php foreach($todos_los_periodos as $p){ ?>
+	                            <option value="<?php echo $cuantos_periodos_hay--;?>"><?=$p?></option>
+							<?php	} ?>
                         </select>
 						</div>
 					</div>
@@ -75,7 +75,7 @@
 				</div>	
 			</form>
 
-			<h1 class="gris"><strong>Detallado de Solicitudes de Beca </strong>
+			<h1 class="gris"><strong>Detallado de Solicitudes de Beca</strong>
 				<button id="mostrar_becados" class="btn btn-danger btn-sm">Mostrar Becados <i class="fa fa-list"></i></button>
 				<button id="exportar_excel" class="btn btn-success btn-sm">Exportar a Excel <i class="fa fa-file-excel-o"></i></button>
 				<button id="imprimir_becados" class="btn btn-primary btn-sm">Imprimir <i class="fa fa-print"></i></button>
@@ -100,9 +100,18 @@
 	</div><!-- row -->  	
 </div><!-- container -->  
 
+<div class="modal fade printable" tabindex="-1" role="dialog" aria-labelledby="myModal" id="modal_motivos">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content" id="modal_detalle">
+
+		</div>
+	</div>
+</div>
+
+
 <script type="text/javascript">
 
-var dire_solicitantes = "<?=base_url()?>"+"index.php/Asignacion/printSolicitantes/";
+var dire_solicitantes = "<?=base_url()?>"+"index.php/Detallado/printSolicitantes/";
 
 var numero_de_periodo = 0;
 var id_carrera = 0;
@@ -124,6 +133,9 @@ $(document).ready(function(){
 
 });
 
+$(document).on("hidden.bs.modal", function(e){
+	$(e.target).removeData("bs.modal").find(".modal-content").empty();
+});
 
 $('#elegir_carrera').change(function(e){
 	$.isLoading({ text: "Obteniendo datos " });

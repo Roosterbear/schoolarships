@@ -69,8 +69,7 @@ class Utilerias
 		
 		$rs = $DBSito->Execute($sql);				
 		
-		return $rs->fields['periodo'];	
-		
+		return $rs->fields['periodo'];
 	}
 	
 	// ID PERIODO ANTERIOR
@@ -120,6 +119,9 @@ class Utilerias
 		return $periodo;
 	}
 	
+	
+	
+	
 	public function cuantosPeriodosHay(){
 		global $DBSito;
 		
@@ -130,6 +132,14 @@ class Utilerias
 		return $rs->fields['periodos'];
 	}
 	
+
+	// -----------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------
+	// Debido a que solicitan todos los periodos en los reportes, se va a usar esta funcion para los menus
+	// -----------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------
+	
+		
 	public function todosLosPeriodos(){
 		$cuantos_periodos_hay = $this->cuantosPeriodosHay();
 				
@@ -614,8 +624,7 @@ class Utilerias
 		// Comment to test and do not UPDATE
 		$rs = $DBSito->Execute($sql);
 	
-		return "Beca descancelada para matricula $matricula";
-	
+		return "Beca descancelada para matricula {$matricula}";	
 	}
 	
 	
@@ -937,16 +946,13 @@ class Utilerias
 				(matricula,cve_beca_cat,cve_periodo,estatus,fecha,cve_cajero,fecha_fin) 
 				values ('$matricula',$beca,$periodo,1,'$fecha_inicio',666,'$fecha_fin')";
 		
-		// Uncommento to test
-		$texto = '<prueba sistemas> ';
-		// ------------------
-		
 		$texto = 'ALTA de Beca por IP: '.$ip;
 		$texto .= ' en el Periodo: '.$periodo.' Matricula: '.$matricula.' Beca: '.$beca.' '.$fecha_inicio.' '.$fecha_fin;
 		
 		$this->setLog($texto);
+		
 		// Comment to test and do not CREATE
-		//$rs = $DBSito->Execute($sql);
+		$rs = $DBSito->Execute($sql);
 							
 		return $sql;
 	}
@@ -965,20 +971,27 @@ class Utilerias
 			return false;
 		}
 	}
+		
 	
-	
-	
-	public function modificarBecaIndividual($periodo, $matricula, $beca){
+	public function modificarBecaIndividual($data){
 		global $DBSito;
+		
+		$periodo = $data['periodo'];
+		$matricula = $data['matricula'];
+		$beca = $data['beca'];
+		$ip = $data['ip'];
 		
 		$sql = "update beca_asignada set cve_beca_cat = $beca where cve_periodo = $periodo and matricula = $matricula";
 		
 		if ($this->estaCancelada($periodo, $matricula)){
 			return true;			
 		}else{
+			$texto = 'MODIFICACION de Beca por IP: '.$ip;
+			$texto .= ' en el Periodo: '.$periodo.' Matricula: '.$matricula.' Beca: '.$beca.' ';
 			
+			$this->setLog($texto);
 			// Comment to test and do not do CHANGES
-			// $rs = $DBSito->Execute($sql);						
+			$rs = $DBSito->Execute($sql);						
 			return false;			
 		}		
 	}
